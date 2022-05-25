@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault-ego
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  # Source cluster and namespace to deploy the application
+  source:
+    # You mention the Git repository of the Helm chart created previously. 
+    # The application will execute files and ressources defined in the chart.
+    repoURL: "https://github.com/WolfMa99/vault-ego-helm-chart.git"  
+    targetRevision: "main"
+    path: templates
+
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
