@@ -14,6 +14,8 @@ spec:
     helm:
       values: | 
         prometheusOperator:
+          tls:
+            enabled: false
           admissionWebhooks:
             enabled: false
   destination:
