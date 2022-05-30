@@ -7,14 +7,10 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-
-  # Source of the application manifests
   source:
     repoURL: https://github.com/WolfMa99/vault-confidential-computing
     targetRevision: HEAD
     path: helm
-   
-  # Destination cluster and namespace to deploy the application
   destination:
     server: https://kubernetes.default.svc
     namespace: production
@@ -23,4 +19,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-
