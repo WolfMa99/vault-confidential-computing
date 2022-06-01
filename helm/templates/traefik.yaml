@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: "https://helm.traefik.io/traefik"  
+    chart: traefik
+    targetRevision: HEAD
+    helm:
+      values: | 
+        additionalArguments:
+          - --certificatesresolvers.myresolver.acme.tlschallenge
+          - --certificatesresolvers.myresolver.acme.email=wolfma99@gmail.com
+          - --certificatesresolvers.myresolver.acme.storage=/certs/acme.json
+          - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+        ports:
+          web:
+            redirectTo: websecure
+        ingressRoute:
+          dashboard:
+            enabled: false
+        persistence:
+          enabled: true
+          path: /certs
+          size: 128Mi
+  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: traefik
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
