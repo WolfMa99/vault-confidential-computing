@@ -16,8 +16,8 @@ spec:
         additionalArguments:
           - --certificatesresolvers.myresolver.acme.tlschallenge
           - --certificatesresolvers.myresolver.acme.email=wolfma99@gmail.com
-          - --certificatesresolvers.myresolver.acme.storage=/certs/acme.json
-          - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+          - --certificatesresolvers.myresolver.acme.storage=/certs/acmeprod.json
+          - --certificatesresolvers.myresolver.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
         ports:
           web:
             redirectTo: websecure
