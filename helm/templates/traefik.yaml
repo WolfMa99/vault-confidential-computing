@@ -25,7 +25,7 @@ spec:
           dashboard:
             enabled: false
         persistence:
-          enabled: true
+          enabled: false
           path: /cert
           size: 128Mi
   
