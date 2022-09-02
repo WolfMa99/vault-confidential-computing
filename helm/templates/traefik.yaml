@@ -16,7 +16,7 @@ spec:
         additionalArguments:
           - --certificatesresolvers.myresolver.acme.tlschallenge
           - --certificatesresolvers.myresolver.acme.email=wolfma99@gmail.com
-          - --certificatesresolvers.myresolver.acme.storage=/certs/acmeproductive.json
+          - --certificatesresolvers.myresolver.acme.storage=/cert/acmeproductive.json
           - --certificatesresolvers.myresolver.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
         ports:
           web:
@@ -26,7 +26,7 @@ spec:
             enabled: false
         persistence:
           enabled: true
-          path: /certs
+          path: /cert
           size: 128Mi
   
   destination:
